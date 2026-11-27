@@ -5,7 +5,7 @@ set -euo pipefail
 
 : "${DRIFTWATCH_BIN:?DRIFTWATCH_BIN must point at the driftwatch binary}"
 
-report_dir="${RUNNER_TEMP:-/tmp}/driftwatch"
+report_dir="${RUNNER_TEMP:-/tmp}/driftwatch-reports"
 mkdir -p "$report_dir"
 md="$report_dir/report.md"
 json="$report_dir/report.json"
