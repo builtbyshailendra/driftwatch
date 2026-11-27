@@ -1,0 +1,12 @@
+# driftwatch ignore rules: one rule per line, "#" starts a comment.
+#   <resource address pattern>                 ignore the whole resource
+#   <resource address pattern> <attribute>     ignore one attribute (and its children)
+# "*" matches any run of characters, "?" matches one character.
+# Map keys may be written tags.Name or tags["Name"]; keys that are not
+# identifiers need brackets: tags["kubernetes.io/role"].
+
+# The worker service is being decommissioned by hand; do not alert on it.
+module.service["worker"].*
+
+# Ownership metadata is edited by the platform portal, not Terraform.
+terraform_data.metadata  input.owner

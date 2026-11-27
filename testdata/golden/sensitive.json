@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "workspace": "drift-demo",
+  "generated_at": "2026-11-07T06:00:00Z",
+  "terraform_version": "1.17.1",
+  "has_drift": true,
+  "summary": {
+    "delete": 0,
+    "replace": 2,
+    "update": 1,
+    "create": 0,
+    "outside": 0,
+    "ignored": 0,
+    "total": 3,
+    "deferred": 0
+  },
+  "changes": [
+    {
+      "address": "terraform_data.retype",
+      "type": "terraform_data",
+      "name": "retype",
+      "provider": "terraform.io/builtin/terraform",
+      "source": "plan",
+      "kind": "replace",
+      "severity": "high",
+      "actions": [
+        "delete",
+        "create"
+      ],
+      "reason": "an attribute that forces replacement changed",
+      "attributes": [
+        {
+          "path": "id",
+          "before": "73940706-6710-adac-9650-eec8a134fa5f",
+          "after": null,
+          "after_unknown": true
+        },
+        {
+          "path": "triggers_replace",
+          "before": {
+            "password": "(sensitive value)",
+            "user": "admin"
+          },
+          "after": "admin",
+          "contains_sensitive": true,
+          "forces_replacement": true
+        }
+      ]
+    },
+    {
+      "address": "terraform_data.unknown",
+      "type": "terraform_data",
+      "name": "unknown",
+      "provider": "terraform.io/builtin/terraform",
+      "source": "plan",
+      "kind": "replace",
+      "severity": "high",
+      "actions": [
+        "delete",
+        "create"
+      ],
+      "reason": "an attribute that forces replacement changed",
+      "attributes": [
+        {
+          "path": "id",
+          "before": "8bfcdd7b-e708-a976-90ad-644c8778f546",
+          "after": null,
+          "after_unknown": true
+        },
+        {
+          "path": "triggers_replace",
+          "before": {
+            "password": "(sensitive value)",
+            "user": "admin"
+          },
+          "after": null,
+          "after_sensitive": true,
+          "contains_sensitive": true,
+          "after_unknown": true,
+          "forces_replacement": true
+        }
+      ]
+    },
+    {
+      "address": "terraform_data.echo",
+      "type": "terraform_data",
+      "name": "echo",
+      "provider": "terraform.io/builtin/terraform",
+      "source": "plan",
+      "kind": "update",
+      "severity": "medium",
+      "actions": [
+        "update"
+      ],
+      "attributes": [
+        {
+          "path": "input",
+          "before": {
+            "password": "(sensitive value)",
+            "user": "admin"
+          },
+          "after": null,
+          "after_sensitive": true,
+          "contains_sensitive": true,
+          "after_unknown": true
+        },
+        {
+          "path": "output",
+          "before": {
+            "password": "(sensitive value)",
+            "user": "admin"
+          },
+          "after": null,
+          "contains_sensitive": true,
+          "after_unknown": true
+        }
+      ]
+    }
+  ],
+  "outside_changes": [],
+  "ignored": []
+}

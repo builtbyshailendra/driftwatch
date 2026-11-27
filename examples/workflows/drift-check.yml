@@ -1,0 +1,59 @@
+# Scheduled drift check for several Terraform root modules.
+# Copy to .github/workflows/drift-check.yml in your infrastructure repository.
+name: drift-check
+
+on:
+  schedule:
+    - cron: "17 6 * * 1-5" # 06:17 UTC on weekdays
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  id-token: write # for cloud credentials through OIDC
+
+concurrency:
+  group: drift-check
+  cancel-in-progress: false
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        workspace: [network, payments-prod, data-platform]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.17.1
+          terraform_wrapper: false # driftwatch needs the raw exit codes
+
+      # Configure provider credentials here, for example with
+      # aws-actions/configure-aws-credentials and a read-only role.
+
+      - name: terraform init
+        working-directory: live/${{ matrix.workspace }}
+        run: terraform init -input=false -lockfile=readonly
+
+      - name: driftwatch
+        id: drift
+        uses: builtbyshailendra/driftwatch/action@main # no release tag yet
+        with:
+          working-directory: live/${{ matrix.workspace }}
+          workspace: ${{ matrix.workspace }}
+          plan-args: |
+            -var-file=${{ matrix.workspace }}.tfvars
+          slack-webhook-url: ${{ secrets.SLACK_DRIFT_WEBHOOK }}
+
+      - name: Keep the reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: drift-${{ matrix.workspace }}
+          path: |
+            ${{ steps.drift.outputs.report-markdown }}
+            ${{ steps.drift.outputs.report-json }}
+          if-no-files-found: ignore

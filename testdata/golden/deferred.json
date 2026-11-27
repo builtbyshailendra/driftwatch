@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "workspace": "drift-demo",
+  "generated_at": "2026-11-07T06:00:00Z",
+  "terraform_version": "1.17.1",
+  "has_drift": true,
+  "plan_incomplete": true,
+  "summary": {
+    "delete": 0,
+    "replace": 0,
+    "update": 1,
+    "create": 0,
+    "outside": 0,
+    "ignored": 0,
+    "total": 1,
+    "deferred": 2
+  },
+  "changes": [
+    {
+      "address": "terraform_data.cluster",
+      "type": "terraform_data",
+      "name": "cluster",
+      "provider": "terraform.io/builtin/terraform",
+      "source": "plan",
+      "kind": "update",
+      "severity": "medium",
+      "actions": [
+        "update"
+      ],
+      "attributes": [
+        {
+          "path": "input.node_count",
+          "before": 3,
+          "after": 5
+        },
+        {
+          "path": "output",
+          "before": {
+            "node_count": 3
+          },
+          "after": null,
+          "after_unknown": true
+        }
+      ]
+    }
+  ],
+  "outside_changes": [],
+  "ignored": [],
+  "deferred_changes": [
+    {
+      "address": "kubernetes_namespace.apps",
+      "actions": [
+        "update"
+      ],
+      "reason": "its provider configuration is known only after apply"
+    },
+    {
+      "address": "terraform_data.node[*]",
+      "actions": [
+        "create"
+      ],
+      "reason": "count or for_each is known only after apply"
+    }
+  ]
+}

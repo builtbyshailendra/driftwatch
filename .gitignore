@@ -1,0 +1,25 @@
+# Build output
+/bin/
+/dist/
+*.exe
+*.test
+*.out
+coverage.*
+
+# Reports written by local runs
+/reports/
+
+# Terraform working files (fixtures are committed as JSON only)
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+testdata/workspaces/**/out/
+
+# Editors and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+.env

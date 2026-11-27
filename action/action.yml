@@ -1,0 +1,95 @@
+name: driftwatch
+description: Detect Terraform drift on a schedule and report it as a GitHub issue, a job summary and a Slack message.
+author: Shailendra Singh
+branding:
+  icon: activity
+  color: orange
+
+inputs:
+  working-directory:
+    description: Terraform working directory. It must already be initialised with terraform init.
+    required: false
+    default: "."
+  workspace:
+    description: Name shown in reports and used to find the tracking issue. Defaults to the directory name.
+    required: false
+    default: ""
+  plan-json:
+    description: Path to an existing "terraform show -json" file. When set, terraform is not run.
+    required: false
+    default: ""
+  plan-args:
+    description: Extra arguments for terraform plan, one per line (for example -var-file=prod.tfvars).
+    required: false
+    default: ""
+  ignore-file:
+    description: Ignore rules file. Defaults to .driftignore in the working directory when present.
+    required: false
+    default: ""
+  create-issue:
+    description: Open, update or close a GitHub issue for this workspace.
+    required: false
+    default: "true"
+  issue-labels:
+    description: Comma-separated labels for the issue. The first label is used to find it again.
+    required: false
+    default: "driftwatch,terraform-drift"
+  close-resolved:
+    description: Close the tracking issue when the drift is gone.
+    required: false
+    default: "true"
+  github-token:
+    description: Token with issues write permission.
+    required: false
+    default: ${{ github.token }}
+  slack-webhook-url:
+    description: Slack incoming webhook URL. Leave empty to skip Slack.
+    required: false
+    default: ""
+  fail-on-drift:
+    description: Fail the step when drift is found.
+    required: false
+    default: "false"
+
+outputs:
+  has-drift:
+    description: '"true" when drift was found after ignore rules, otherwise "false".'
+    value: ${{ steps.check.outputs.has-drift }}
+  report-markdown:
+    description: Path of the Markdown report.
+    value: ${{ steps.check.outputs.report-markdown }}
+  report-json:
+    description: Path of the JSON report.
+    value: ${{ steps.check.outputs.report-json }}
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version-file: ${{ github.action_path }}/../go.mod
+        cache: false
+
+    - name: Build driftwatch
+      shell: bash
+      working-directory: ${{ github.action_path }}/..
+      run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/driftwatch" ./cmd/driftwatch
+
+    - name: Check for drift
+      id: check
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      env:
+        DRIFTWATCH_BIN: ${{ runner.temp }}/driftwatch
+        INPUT_WORKSPACE: ${{ inputs.workspace }}
+        INPUT_PLAN_JSON: ${{ inputs.plan-json }}
+        INPUT_PLAN_ARGS: ${{ inputs.plan-args }}
+        INPUT_IGNORE_FILE: ${{ inputs.ignore-file }}
+        INPUT_CREATE_ISSUE: ${{ inputs.create-issue }}
+        INPUT_ISSUE_LABELS: ${{ inputs.issue-labels }}
+        INPUT_CLOSE_RESOLVED: ${{ inputs.close-resolved }}
+        INPUT_FAIL_ON_DRIFT: ${{ inputs.fail-on-drift }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        SLACK_WEBHOOK_URL: ${{ inputs.slack-webhook-url }}
+      run: bash "$GITHUB_ACTION_PATH/run.sh"

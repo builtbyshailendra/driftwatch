@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "workspace": "drift-demo",
+  "generated_at": "2026-11-07T06:00:00Z",
+  "terraform_version": "1.17.1",
+  "has_drift": true,
+  "summary": {
+    "delete": 0,
+    "replace": 0,
+    "update": 0,
+    "create": 0,
+    "outside": 1,
+    "ignored": 0,
+    "total": 1,
+    "deferred": 0
+  },
+  "changes": [],
+  "outside_changes": [
+    {
+      "address": "local_file.inventory",
+      "type": "local_file",
+      "name": "inventory",
+      "provider": "registry.terraform.io/hashicorp/local",
+      "source": "outside",
+      "kind": "delete",
+      "severity": "high",
+      "actions": [
+        "delete"
+      ]
+    }
+  ],
+  "ignored": []
+}

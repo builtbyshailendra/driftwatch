@@ -1,0 +1,8 @@
+.git
+bin
+dist
+reports
+**/.terraform
+**/*.tfstate*
+**/*.tfplan
+testdata/workspaces/**/out

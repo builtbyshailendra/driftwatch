@@ -1,0 +1,319 @@
+{
+  "schema_version": 1,
+  "workspace": "drift-demo",
+  "generated_at": "2026-11-07T06:00:00Z",
+  "terraform_version": "1.17.1",
+  "has_drift": true,
+  "summary": {
+    "delete": 3,
+    "replace": 5,
+    "update": 1,
+    "create": 1,
+    "outside": 1,
+    "ignored": 0,
+    "total": 10,
+    "deferred": 0
+  },
+  "changes": [
+    {
+      "address": "module.service[\"worker\"].null_resource.rollout",
+      "module_address": "module.service[\"worker\"]",
+      "type": "null_resource",
+      "name": "rollout",
+      "provider": "registry.terraform.io/hashicorp/null",
+      "source": "plan",
+      "kind": "delete",
+      "severity": "high",
+      "actions": [
+        "delete"
+      ],
+      "reason": "its module call was removed from configuration"
+    },
+    {
+      "address": "module.service[\"worker\"].random_integer.port",
+      "module_address": "module.service[\"worker\"]",
+      "type": "random_integer",
+      "name": "port",
+      "provider": "registry.terraform.io/hashicorp/random",
+      "source": "plan",
+      "kind": "delete",
+      "severity": "high",
+      "actions": [
+        "delete"
+      ],
+      "reason": "its module call was removed from configuration"
+    },
+    {
+      "address": "null_resource.cache_warmer[0]",
+      "type": "null_resource",
+      "name": "cache_warmer",
+      "provider": "registry.terraform.io/hashicorp/null",
+      "source": "plan",
+      "kind": "delete",
+      "severity": "high",
+      "actions": [
+        "delete"
+      ],
+      "reason": "count no longer includes this index"
+    },
+    {
+      "address": "local_sensitive_file.database_env",
+      "type": "local_sensitive_file",
+      "name": "database_env",
+      "provider": "registry.terraform.io/hashicorp/local",
+      "source": "plan",
+      "kind": "replace",
+      "severity": "high",
+      "actions": [
+        "delete",
+        "create"
+      ],
+      "reason": "an attribute that forces replacement changed",
+      "attributes": [
+        {
+          "path": "content",
+          "before": null,
+          "after": null,
+          "before_sensitive": true,
+          "after_sensitive": true,
+          "after_unknown": true,
+          "forces_replacement": true
+        },
+        {
+          "path": "content_base64sha256",
+          "before": "YHpGcbFHZfietomE71Qf7li+/qZouzPqbzwUWTNnDd0=",
+          "after": null,
+          "after_unknown": true
+        },
+        {
+          "path": "content_base64sha512",
+          "before": "YPj/GNL0k6Yu+OTlm9oaFcs8EHtnOpM7mhU93E6GcgyWK3iu9OX+dhicXrPLuW251R/Cf9C4yFXVr+kH5MUSiA==",
+          "after": null,
+          "after_unknown": true
+        },
+        {
+          "path": "content_md5",
+          "before": "bb1b6064693f8b30b11703cc22591187",
+          "after": null,
+          "after_unknown": true
+        },
+        {
+          "path": "content_sha1",
+          "before": "fe672ace37880a495856b72c203c00e2970a6562",
+          "after": null,
+          "after_unknown": true
+        },
+        {
+          "path": "content_sha256",
+          "before": "607a4671b14765f89eb68984ef541fee58befea668bb33ea6f3c145933670ddd",
+          "after": null,
+          "after_unknown": true
+        },
+        {
+          "path": "content_sha512",
+          "before": "60f8ff18d2f493a62ef8e4e59bda1a15cb3c107b673a933b9a153ddc4e86720c962b78aef4e5fe76189c5eb3cbb96db9d51fc27fd0b8c855d5afe907e4c51288",
+          "after": null,
+          "after_unknown": true
+        },
+        {
+          "path": "id",
+          "before": "fe672ace37880a495856b72c203c00e2970a6562",
+          "after": null,
+          "after_unknown": true
+        }
+      ]
+    },
+    {
+      "address": "module.service[\"api\"].null_resource.rollout",
+      "module_address": "module.service[\"api\"]",
+      "type": "null_resource",
+      "name": "rollout",
+      "provider": "registry.terraform.io/hashicorp/null",
+      "source": "plan",
+      "kind": "replace",
+      "severity": "high",
+      "actions": [
+        "delete",
+        "create"
+      ],
+      "reason": "an attribute that forces replacement changed",
+      "attributes": [
+        {
+          "path": "id",
+          "before": "4187770975788110611",
+          "after": null,
+          "after_unknown": true
+        },
+        {
+          "path": "triggers.release",
+          "before": "2026.11.0",
+          "after": "2026.11.1",
+          "forces_replacement": true
+        }
+      ]
+    },
+    {
+      "address": "null_resource.deploy",
+      "type": "null_resource",
+      "name": "deploy",
+      "provider": "registry.terraform.io/hashicorp/null",
+      "source": "plan",
+      "kind": "replace",
+      "severity": "high",
+      "actions": [
+        "delete",
+        "create"
+      ],
+      "reason": "an attribute that forces replacement changed",
+      "attributes": [
+        {
+          "path": "id",
+          "before": "7911440036760242250",
+          "after": null,
+          "after_unknown": true
+        },
+        {
+          "path": "triggers.environment",
+          "before": "assuring-hog",
+          "after": null,
+          "after_unknown": true,
+          "forces_replacement": true
+        },
+        {
+          "path": "triggers.release",
+          "before": "2026.11.0",
+          "after": "2026.11.1",
+          "forces_replacement": true
+        }
+      ]
+    },
+    {
+      "address": "random_password.database",
+      "type": "random_password",
+      "name": "database",
+      "provider": "registry.terraform.io/hashicorp/random",
+      "source": "plan",
+      "kind": "replace",
+      "severity": "high",
+      "actions": [
+        "delete",
+        "create"
+      ],
+      "reason": "an attribute that forces replacement changed",
+      "attributes": [
+        {
+          "path": "bcrypt_hash",
+          "before": null,
+          "after": null,
+          "before_sensitive": true,
+          "after_sensitive": true,
+          "after_unknown": true
+        },
+        {
+          "path": "id",
+          "before": "none",
+          "after": null,
+          "after_unknown": true
+        },
+        {
+          "path": "keepers.rotation",
+          "before": "2026-q4",
+          "after": "2027-q1",
+          "forces_replacement": true
+        },
+        {
+          "path": "result",
+          "before": null,
+          "after": null,
+          "before_sensitive": true,
+          "after_sensitive": true,
+          "after_unknown": true
+        }
+      ]
+    },
+    {
+      "address": "random_pet.environment",
+      "type": "random_pet",
+      "name": "environment",
+      "provider": "registry.terraform.io/hashicorp/random",
+      "source": "plan",
+      "kind": "replace",
+      "severity": "high",
+      "actions": [
+        "delete",
+        "create"
+      ],
+      "reason": "an attribute that forces replacement changed",
+      "attributes": [
+        {
+          "path": "id",
+          "before": "assuring-hog",
+          "after": null,
+          "after_unknown": true
+        },
+        {
+          "path": "keepers.release",
+          "before": "2026.11.0",
+          "after": "2026.11.1",
+          "forces_replacement": true
+        }
+      ]
+    },
+    {
+      "address": "terraform_data.metadata",
+      "type": "terraform_data",
+      "name": "metadata",
+      "provider": "terraform.io/builtin/terraform",
+      "source": "plan",
+      "kind": "update",
+      "severity": "medium",
+      "actions": [
+        "update"
+      ],
+      "attributes": [
+        {
+          "path": "input.owner",
+          "before": "platform-team",
+          "after": "data-platform"
+        },
+        {
+          "path": "output",
+          "before": {
+            "cost_center": "cc-4410",
+            "owner": "platform-team",
+            "tier": "gold"
+          },
+          "after": null,
+          "after_unknown": true
+        }
+      ]
+    },
+    {
+      "address": "local_file.inventory",
+      "type": "local_file",
+      "name": "inventory",
+      "provider": "registry.terraform.io/hashicorp/local",
+      "source": "plan",
+      "kind": "create",
+      "severity": "low",
+      "actions": [
+        "create"
+      ]
+    }
+  ],
+  "outside_changes": [
+    {
+      "address": "local_file.inventory",
+      "type": "local_file",
+      "name": "inventory",
+      "provider": "registry.terraform.io/hashicorp/local",
+      "source": "outside",
+      "kind": "delete",
+      "severity": "high",
+      "actions": [
+        "delete"
+      ]
+    }
+  ],
+  "ignored": []
+}
