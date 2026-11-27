@@ -1,5 +1,7 @@
 # driftwatch
 
+[![ci](https://github.com/builtbyshailendra/driftwatch/actions/workflows/ci.yml/badge.svg)](https://github.com/builtbyshailendra/driftwatch/actions/workflows/ci.yml)
+
 > Personal learning project, built pairing with Claude Code. Every company, person and number here is made up.
 
 Terraform drift detection that reads the plan the way Terraform writes it.
